@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  ptest:
+    
+    image: python:3.8-slim
+
+    volumes:
+      - ./show-env.py:/show-env.py
+      - ./outdir:/outdir
+
+    env_file:
+      - .env
+    
+    environment:
+      - z=1
+      - y='1'
+      - x=''
+      - u="1"
+    
+    command: 
+      - bash
+      - -c 
+      - |
+        env | grep -E '^[a-z]*=' > "/outdir/sh.${COMPOSE}.txt"
+        python show-env.py > "/outdir/py.${COMPOSE}.txt"
+
+
+
