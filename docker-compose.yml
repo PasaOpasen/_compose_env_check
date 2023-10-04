@@ -22,6 +22,9 @@ services:
       - bash
       - -c 
       - |
+        export g=string
+        export h="string"
+
         env | grep -E '^[a-z]*=' > "/outdir/sh.${COMPOSE}.txt"
         python show-env.py > "/outdir/py.${COMPOSE}.txt"
 
